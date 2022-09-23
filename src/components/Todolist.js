@@ -8,6 +8,7 @@ function Todolist() {
   const [todos, setTodos] = useState([]);
 
   const handleChange = (e) => {
+    e.preventDefault();
     const value = e.target.value;
     setTodo({
       ...todo,
@@ -20,6 +21,12 @@ function Todolist() {
     setTodos([todo, ...todos])
     //reset input
     setTodo({description: "", date: ""})
+    
+  }
+
+  const handleDelete = (index, e) => {
+    console.log(index)
+    setTodos(todos.filter((todo, i) => i !== index));
     
   }
 
@@ -58,8 +65,7 @@ function Todolist() {
         <tbody>
           {todos.map((todo, index) => (
             <tr key={index}>
-              <td>{todo.description}</td>
-              <td>{todo.date}</td>
+              <td>{todo.description}</td><td>{todo.date}</td><td><button onClick={e => handleDelete(index, e)}> Delete </button></td>
             </tr>
           ))}
         </tbody>
